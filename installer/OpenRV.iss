@@ -71,9 +71,11 @@ Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; Val
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "lif"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "lmp"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "mdl"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "mkv"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "mov"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "movieproc"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "mp4"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "mxf"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "mraysubfile"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "openexr"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "pbm"; ValueData: ""; Tasks: openwith
@@ -109,6 +111,7 @@ Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; Val
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "txt"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "wal"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "wav"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "webm"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "yuv"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "z"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "zfile"; ValueData: ""; Tasks: openwith

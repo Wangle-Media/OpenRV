@@ -13,6 +13,8 @@
 # RV_FFMPEG_CONFIG_OPTIONS - Custom FFmpeg configure options to enable/disable decoders and encoders 
 # RV_FFMPEG_EXTRA_C_OPTIONS - Extra cflags options 
 # RV_FFMPEG_EXTRA_LIBPATH_OPTIONS - Extra libpath options
+# RV_FFMPEG_NON_FREE_DECODERS_TO_ENABLE - Decoders to opt-in from OpenRV's disabled-by-default list
+# RV_FFMPEG_NON_FREE_ENCODERS_TO_ENABLE - Encoders to opt-in from OpenRV's disabled-by-default list
 # cmake-format: on
 # ------------------------------------------------------------------------------
 
@@ -202,6 +204,18 @@ ELSE()
 ENDIF()
 
 OPTION(RV_FFMPEG_USE_VIDEOTOOLBOX "FFmpeg laveraging the VideoToolbox framework" ${RV_FFMPEG_USE_VIDEOTOOLBOX_DEFAULT_VALUE})
+
+SET(
+  RV_FFMPEG_NON_FREE_DECODERS_TO_ENABLE
+  "prores;dnxhd;vp9"
+  CACHE STRING "Semicolon-separated FFmpeg decoders to enable from OpenRV's default disabled list"
+)
+
+SET(
+  RV_FFMPEG_NON_FREE_ENCODERS_TO_ENABLE
+  ""
+  CACHE STRING "Semicolon-separated FFmpeg encoders to enable from OpenRV's default disabled list"
+)
 
 # Make a list of the Open RV's FFmpeg config options unless already customized. Note that a super project, a project consuming Open RV as a submodule, can
 # customize the FFmpeg config options via the RV_FFMPEG_CONFIG_OPTIONS cmake property.
