@@ -182,6 +182,16 @@ SET(RV_DEPS_OIIO_DOWNLOAD_HASH
     "5af6de5a73c6d234eed8e2874a5aed62"
 )
 
+# libheif https://github.com/strukturag/libheif
+SET(RV_DEPS_HEIF_VERSION
+    "1.20.2"
+)
+
+# libjxl https://github.com/libjxl/libjxl
+SET(RV_DEPS_JXL_VERSION
+    "0.11.1"
+)
+
 # openjpeg https://github.com/uclouvain/openjpeg
 SET(RV_DEPS_OPENJPEG_VERSION
     "2.5.0"

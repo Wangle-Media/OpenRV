@@ -48,6 +48,7 @@ Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; Val
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "ari"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "au"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "avi"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "avif"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "bmp"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "bw"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "cin"; ValueData: ""; Tasks: openwith
@@ -59,6 +60,8 @@ Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; Val
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "exr"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "gif"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "hdr"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "heic"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "heif"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "ico"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "iff"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "j2c"; ValueData: ""; Tasks: openwith
@@ -66,6 +69,7 @@ Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; Val
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "jp2"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "jpeg"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "jpg"; ValueData: ""; Tasks: openwith
+Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "jxl"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "jpt"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "lbm"; ValueData: ""; Tasks: openwith
 Root: HKCR; Subkey: "Applications\rv.exe\SupportedTypes"; ValueType: string; ValueName: "lif"; ValueData: ""; Tasks: openwith
