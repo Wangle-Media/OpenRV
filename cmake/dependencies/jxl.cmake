@@ -5,8 +5,7 @@
 #
 
 #
-# libjxl scaffolding module for Phase 2.
-# This module intentionally exposes a dependency target without building libjxl yet.
+# libjxl official source repository: https://github.com/libjxl/libjxl
 #
 
 INCLUDE(ProcessorCount) # require CMake 3.15+
@@ -15,14 +14,66 @@ PROCESSORCOUNT(_cpu_count)
 RV_CREATE_STANDARD_DEPS_VARIABLES("RV_DEPS_JXL" "${RV_DEPS_JXL_VERSION}" "make" "")
 RV_SHOW_STANDARD_DEPS_VARIABLES()
 
-ADD_CUSTOM_TARGET(${_target})
-ADD_CUSTOM_TARGET(${_target}-stage-target)
+SET(_download_url
+    "https://github.com/libjxl/libjxl/archive/refs/tags/v${_version}.tar.gz"
+)
+
+RV_MAKE_STANDARD_LIB_NAME("jxl" "" "SHARED" "")
+
+LIST(APPEND _configure_options "-DBUILD_SHARED_LIBS=ON")
+LIST(APPEND _configure_options "-DBUILD_TESTING=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_ENABLE_TOOLS=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_ENABLE_EXAMPLES=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_ENABLE_BENCHMARK=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_ENABLE_DOXYGEN=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_ENABLE_MANPAGES=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_ENABLE_JPEGLI=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_FORCE_SYSTEM_BROTLI=OFF")
+LIST(APPEND _configure_options "-DJPEGXL_FORCE_SYSTEM_HWY=OFF")
+
+EXTERNALPROJECT_ADD(
+  ${_target}
+  URL ${_download_url}
+  DOWNLOAD_NAME ${_target}_${_version}.tar.gz
+  DOWNLOAD_DIR ${RV_DEPS_DOWNLOAD_DIR}
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  SOURCE_DIR ${_source_dir}
+  BINARY_DIR ${_build_dir}
+  INSTALL_DIR ${_install_dir}
+  DEPENDS ZLIB::ZLIB PNG::PNG jpeg-turbo::jpeg
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} ${_configure_options}
+  BUILD_COMMAND ${_cmake_build_command}
+  INSTALL_COMMAND ${_cmake_install_command}
+  BUILD_IN_SOURCE FALSE
+  BUILD_ALWAYS FALSE
+  BUILD_BYPRODUCTS ${_byproducts}
+  USES_TERMINAL_BUILD TRUE
+)
+
+RV_COPY_LIB_BIN_FOLDERS()
+
 ADD_DEPENDENCIES(dependencies ${_target}-stage-target)
 
-ADD_LIBRARY(Jxl::Jxl INTERFACE IMPORTED GLOBAL)
+ADD_LIBRARY(Jxl::Jxl SHARED IMPORTED GLOBAL)
 ADD_DEPENDENCIES(Jxl::Jxl ${_target})
 
-# It is required to force directory creation at configure time otherwise CMake complains about importing a non-existing path
+SET_PROPERTY(
+  TARGET Jxl::Jxl
+  PROPERTY IMPORTED_LOCATION ${_libpath}
+)
+
+SET_PROPERTY(
+  TARGET Jxl::Jxl
+  PROPERTY IMPORTED_SONAME ${_libname}
+)
+
+IF(RV_TARGET_WINDOWS)
+  SET_PROPERTY(
+    TARGET Jxl::Jxl
+    PROPERTY IMPORTED_IMPLIB ${_implibpath}
+  )
+ENDIF()
+
 FILE(MAKE_DIRECTORY "${_include_dir}")
 TARGET_INCLUDE_DIRECTORIES(
   Jxl::Jxl

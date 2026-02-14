@@ -116,3 +116,12 @@ SET_PROPERTY(
   CACHE RV_FFMPEG
   PROPERTY STRINGS ${_RV_FFMPEG}
 )
+
+#
+# HEIF/JXL Phase 2/3 options
+#
+# RV_ENABLE_HEIF_JXL_DEPS enables dependency scaffolding modules (cmake/dependencies/heif.cmake and jxl.cmake).
+# RV_OIIO_ENABLE_HEIF_JXL enables OpenImageIO HEIF/JXL discovery/integration flags.
+# Both are OFF by default to preserve current build behavior.
+OPTION(RV_ENABLE_HEIF_JXL_DEPS "Enable HEIF/JXL dependency scaffolding modules." OFF)
+OPTION(RV_OIIO_ENABLE_HEIF_JXL "Enable OIIO HEIF/JXL integration flags (requires RV_ENABLE_HEIF_JXL_DEPS)." OFF)

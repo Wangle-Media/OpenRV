@@ -99,6 +99,26 @@ LIST(APPEND _configure_options "-DTIFF_ROOT=${RV_DEPS_TIFF_ROOT_DIR}")
 
 LIST(APPEND _configure_options "-USE_FFMPEG=0")
 
+IF(RV_OIIO_ENABLE_HEIF_JXL)
+  IF(NOT RV_ENABLE_HEIF_JXL_DEPS)
+    MESSAGE(FATAL_ERROR "RV_OIIO_ENABLE_HEIF_JXL=ON requires RV_ENABLE_HEIF_JXL_DEPS=ON")
+  ENDIF()
+  SET(_depends_heif_jxl
+      Heif::Heif
+      Jxl::Jxl
+  )
+  LIST(APPEND _configure_options "-DUSE_HEIF=ON")
+  LIST(APPEND _configure_options "-DUSE_JXL=ON")
+  LIST(APPEND _configure_options "-DLibheif_ROOT=${RV_DEPS_HEIF_ROOT_DIR}")
+  LIST(APPEND _configure_options "-DJXL_ROOT=${RV_DEPS_JXL_ROOT_DIR}")
+ELSE()
+  SET(_depends_heif_jxl
+      ""
+  )
+  LIST(APPEND _configure_options "-DUSE_HEIF=OFF")
+  LIST(APPEND _configure_options "-DUSE_JXL=OFF")
+ENDIF()
+
 IF(RV_TARGET_LINUX)
   MESSAGE(STATUS "Building OpenImageIO using system's freetype library.")
   SET(_depends_freetype
@@ -156,6 +176,7 @@ IF(NOT RV_TARGET_WINDOWS)
             Webp::Webp
             Raw::Raw
             ZLIB::ZLIB
+            ${_depends_heif_jxl}
     CONFIGURE_COMMAND ${CMAKE_COMMAND} ${_configure_options}
     BUILD_COMMAND ${_cmake_build_command}
     INSTALL_COMMAND ${_cmake_install_command}
@@ -210,6 +231,7 @@ ELSE()
             Webp::Webp
             Raw::Raw
             ZLIB::ZLIB
+            ${_depends_heif_jxl}
     CONFIGURE_COMMAND ${CMAKE_COMMAND} ${_configure_options}
     BUILD_COMMAND ${CMAKE_COMMAND} ${_oiio_build_options}
     INSTALL_COMMAND ${CMAKE_COMMAND} ${_oiio_install_options}
