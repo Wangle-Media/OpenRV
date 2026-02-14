@@ -19,13 +19,57 @@ Use both toggles explicitly:
 
 ### Windows (PowerShell)
 
+Before building on Windows 10+, complete the platform setup in the official OpenRV docs:
+
+- https://aswf-openrv.readthedocs.io/en/latest/build_system/config_windows.html
+
+Important: On Windows, OpenRV is built with Microsoft Visual Studio (CMake `Visual Studio 17 2022` generator). MSYS2 MinGW64 is used to provide required Unix-style build tools.
+
 ```powershell
 cmake -S C:\OpenRV -B C:\OpenRV\_build `
+  -G "Visual Studio 17 2022" `
+  -A x64 `
   -DRV_ENABLE_HEIF_JXL_DEPS=ON `
   -DRV_OIIO_ENABLE_HEIF_JXL=ON
 
 cmake --build C:\OpenRV\_build --config Release --target rv
 ```
+
+### Windows (MSYS2 MinGW64 shell)
+
+Preflight in the same shell:
+
+```bash
+which cmake
+which ninja
+which sed
+which git
+```
+
+Qt requirement:
+
+- Use the Qt kit expected by the selected VFX/CY platform from the Windows setup guide (for CY2024/CY2025/CY2026 currently `msvc2019_64` in project docs).
+
+If any command is missing, install prerequisites first (from MSYS2 MinGW64):
+
+```bash
+pacman -S --needed mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-sed git
+```
+
+Install/verify tools in MSYS2 MinGW64 (tooling preflight):
+
+```bash
+pacman -S --needed \
+  mingw-w64-x86_64-autotools \
+  mingw-w64-x86_64-glew \
+  mingw-w64-x86_64-libarchive \
+  mingw-w64-x86_64-make \
+  mingw-w64-x86_64-meson \
+  mingw-w64-x86_64-toolchain \
+  autoconf automake bison flex git libtool nasm p7zip patch unzip zip
+```
+
+Then run configure/build using the Visual Studio generator (PowerShell or Developer Command Prompt), not a MinGW compiler build.
 
 ### Linux/macOS (shell)
 
