@@ -15,6 +15,8 @@ build_system/config_windows
 :caption: Building OpenRV
 build_system/config_common_build
 build_system/build_errors
+build_system/format_extension_pr_plan
+build_system/format_extension_phase3c_checklist
 ```
 
 ```{toctree}

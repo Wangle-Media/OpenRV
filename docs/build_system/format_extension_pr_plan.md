@@ -109,8 +109,31 @@ Requires dependency integration and OIIO wiring, which has broader build-system 
 1. PR-1: FFmpeg decoder opt-ins + Open-with extension updates.
 2. PR-2: Dependency scaffolding for `libheif`/`libjxl`.
 3. PR-3: OIIO integration + format tests + docs.
+4. PR-4: Runtime validation gate + release checklist (Phase 3C).
 
 This split keeps review/rollback simple and isolates risk.
+
+---
+
+## Phase 3C (Validation Gate): Runtime verification + release readiness
+
+### Why now
+
+After dependency and OIIO wiring, runtime proof is required before treating HEIF/JXL support as stable.
+
+### Scope
+
+1. Build with `RV_ENABLE_HEIF_JXL_DEPS=ON` and `RV_OIIO_ENABLE_HEIF_JXL=ON`.
+2. Smoke-test AVIF/HEIF/JXL decode/open behavior.
+3. Verify baseline still-image regressions (EXR/PNG-or-JPEG/TIFF).
+4. Confirm Windows installer/Open With behavior for `.avif/.heic/.heif/.jxl`.
+5. Publish concise release notes only after validation is complete.
+
+### Checklist
+
+Use the operational checklist in:
+
+- `docs/build_system/format_extension_phase3c_checklist.md`
 
 ---
 
