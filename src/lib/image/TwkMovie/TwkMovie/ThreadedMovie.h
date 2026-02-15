@@ -102,6 +102,7 @@ namespace TwkMovie
         ThreadDataVector m_threadData;
         int m_currentIndex;
         int m_requestIndex;
+        bool m_evalException;
         bool m_init;
         InitializeFunc m_initialize;
     };

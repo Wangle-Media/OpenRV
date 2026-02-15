@@ -187,6 +187,11 @@ SET(RV_DEPS_HEIF_VERSION
     "1.20.2"
 )
 
+# libde265 https://github.com/strukturag/libde265
+SET(RV_DEPS_LIBDE265_VERSION
+    "1.0.15"
+)
+
 # libjxl https://github.com/libjxl/libjxl
 SET(RV_DEPS_JXL_VERSION
     "0.11.1"

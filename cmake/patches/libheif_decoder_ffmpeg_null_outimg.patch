@@ -1,0 +1,18 @@
+--- libheif/plugins/decoder_ffmpeg.cc
++++ libheif/plugins/decoder_ffmpeg.cc
+@@
+-  nclx = heif_nclx_color_profile_alloc();
+-  heif_nclx_color_profile_set_color_primaries(nclx, static_cast<uint16_t>(color_primaries));
+-  heif_nclx_color_profile_set_transfer_characteristics(nclx, static_cast<uint16_t>(transfer_characteristics));
+-  heif_nclx_color_profile_set_matrix_coefficients(nclx, static_cast<uint16_t>(matrix_coefficients));
+-  nclx->full_range_flag = (bool)video_full_range_flag;
+-  heif_image_set_nclx_color_profile(*out_img, nclx);
++  if (out_img && *out_img)
++  {
++    nclx = heif_nclx_color_profile_alloc();
++    heif_nclx_color_profile_set_color_primaries(nclx, static_cast<uint16_t>(color_primaries));
++    heif_nclx_color_profile_set_transfer_characteristics(nclx, static_cast<uint16_t>(transfer_characteristics));
++    heif_nclx_color_profile_set_matrix_coefficients(nclx, static_cast<uint16_t>(matrix_coefficients));
++    nclx->full_range_flag = (bool)video_full_range_flag;
++    heif_image_set_nclx_color_profile(*out_img, nclx);
++  }

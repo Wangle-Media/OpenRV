@@ -14,10 +14,6 @@ PROCESSORCOUNT(_cpu_count)
 RV_CREATE_STANDARD_DEPS_VARIABLES("RV_DEPS_JXL" "${RV_DEPS_JXL_VERSION}" "make" "")
 RV_SHOW_STANDARD_DEPS_VARIABLES()
 
-SET(_download_url
-    "https://github.com/libjxl/libjxl/archive/refs/tags/v${_version}.tar.gz"
-)
-
 RV_MAKE_STANDARD_LIB_NAME("jxl" "" "SHARED" "")
 
 LIST(APPEND _configure_options "-DBUILD_SHARED_LIBS=ON")
@@ -33,10 +29,20 @@ LIST(APPEND _configure_options "-DJPEGXL_FORCE_SYSTEM_HWY=OFF")
 
 EXTERNALPROJECT_ADD(
   ${_target}
-  URL ${_download_url}
-  DOWNLOAD_NAME ${_target}_${_version}.tar.gz
-  DOWNLOAD_DIR ${RV_DEPS_DOWNLOAD_DIR}
-  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  GIT_REPOSITORY https://github.com/libjxl/libjxl.git
+  GIT_TAG v${_version}
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
+  GIT_SUBMODULES
+    third_party/brotli
+    third_party/highway
+    third_party/lcms
+    third_party/libjpeg-turbo
+    third_party/libpng
+    third_party/sjpeg
+    third_party/skcms
+    third_party/zlib
+  GIT_SUBMODULES_RECURSE FALSE
   SOURCE_DIR ${_source_dir}
   BINARY_DIR ${_build_dir}
   INSTALL_DIR ${_install_dir}

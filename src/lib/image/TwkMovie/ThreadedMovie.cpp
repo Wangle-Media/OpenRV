@@ -23,6 +23,7 @@ namespace TwkMovie
         : m_movies(movies)
         , m_threadGroup(movies.size(), stackMultiplier, api)
         , m_frames(frames)
+        , m_evalException(false)
         , m_init(true)
         , m_currentIndex(0)
         , m_requestIndex(0)
@@ -159,6 +160,9 @@ namespace TwkMovie
                                 "frame "
                              << frame << ":" << endl;
                         cerr << exc.what() << endl;
+                        lock();
+                        m_evalException = true;
+                        m_map[frame] = FrameBufferVector();
                         unlock();
                         break;
                     }
@@ -257,6 +261,9 @@ namespace TwkMovie
 #endif
 
         fbs.clear();
+        lock();
+        m_evalException = false;
+        unlock();
 
         for (size_t count = 0; true; count++)
         {
@@ -272,6 +279,12 @@ namespace TwkMovie
                 m_map.erase(i);
                 // cout << "consumed frame " << frame << endl;
                 unlock();
+
+                if (fbs.empty())
+                {
+                    TWK_THROW_EXC_STREAM("ThreadedMovie failed to evaluate frame " << frame);
+                }
+
                 dispatchAll();
                 break;
             }
@@ -283,6 +296,15 @@ namespace TwkMovie
                 //
 
                 m_threadGroup.control_wait(false);
+
+                lock();
+                const bool evalException = m_evalException;
+                unlock();
+
+                if (evalException)
+                {
+                    TWK_THROW_EXC_STREAM("ThreadedMovie failed to evaluate frame " << frame);
+                }
 
                 if (count > 0)
                 {

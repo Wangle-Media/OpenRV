@@ -56,6 +56,10 @@ LIST(APPEND _configure_options "-DUSE_FREETYPE=0")
 LIST(APPEND _configure_options "-DUSE_GIF=OFF")
 
 LIST(APPEND _configure_options "-DBoost_ROOT=${RV_DEPS_BOOST_ROOT_DIR}")
+LIST(APPEND _configure_options "-DBOOST_ROOT=${RV_DEPS_BOOST_ROOT_DIR}")
+LIST(APPEND _configure_options "-DBOOST_INCLUDEDIR=${RV_DEPS_BOOST_ROOT_DIR}/include")
+LIST(APPEND _configure_options "-DBOOST_LIBRARYDIR=${RV_DEPS_BOOST_ROOT_DIR}/lib")
+LIST(APPEND _configure_options "-DBoost_NO_BOOST_CMAKE=OFF")
 LIST(APPEND _configure_options "-DOpenEXR_ROOT=${RV_DEPS_OPENEXR_ROOT_DIR}")
 
 IF(NOT RV_TARGET_WINDOWS)
@@ -110,6 +114,8 @@ IF(RV_OIIO_ENABLE_HEIF_JXL)
   LIST(APPEND _configure_options "-DUSE_HEIF=ON")
   LIST(APPEND _configure_options "-DUSE_JXL=ON")
   LIST(APPEND _configure_options "-DLibheif_ROOT=${RV_DEPS_HEIF_ROOT_DIR}")
+  LIST(APPEND _configure_options "-DLIBHEIF_INCLUDE_PATH=${RV_DEPS_HEIF_ROOT_DIR}/include")
+  LIST(APPEND _configure_options "-DLIBHEIF_LIBRARY_PATH=${RV_DEPS_HEIF_ROOT_DIR}/lib")
   LIST(APPEND _configure_options "-DJXL_ROOT=${RV_DEPS_JXL_ROOT_DIR}")
 ELSE()
   SET(_depends_heif_jxl
@@ -147,6 +153,10 @@ LIST(APPEND _configure_options "-DZLIB_ROOT=${RV_DEPS_ZLIB_ROOT_DIR}")
 # OIIO tools are not needed.
 LIST(APPEND _configure_options "-DOIIO_BUILD_TOOLS=OFF" "-DOIIO_BUILD_TESTS=OFF")
 
+SET(_oiio_patch_command
+  ${CMAKE_COMMAND} -DOIIO_HEIFINPUT_FILE=src/heif.imageio/heifinput.cpp -P "${PROJECT_SOURCE_DIR}/cmake/patches/oiio_heifinput_orientation_guard.cmake"
+)
+
 IF(RV_TARGET_WINDOWS)
   LIST(PREPEND _configure_options "-G ${CMAKE_GENERATOR}")
 ENDIF()
@@ -177,6 +187,7 @@ IF(NOT RV_TARGET_WINDOWS)
             Raw::Raw
             ZLIB::ZLIB
             ${_depends_heif_jxl}
+              PATCH_COMMAND ${_oiio_patch_command}
     CONFIGURE_COMMAND ${CMAKE_COMMAND} ${_configure_options}
     BUILD_COMMAND ${_cmake_build_command}
     INSTALL_COMMAND ${_cmake_install_command}
@@ -232,6 +243,7 @@ ELSE()
             Raw::Raw
             ZLIB::ZLIB
             ${_depends_heif_jxl}
+              PATCH_COMMAND ${_oiio_patch_command}
     CONFIGURE_COMMAND ${CMAKE_COMMAND} ${_configure_options}
     BUILD_COMMAND ${CMAKE_COMMAND} ${_oiio_build_options}
     INSTALL_COMMAND ${CMAKE_COMMAND} ${_oiio_install_options}
